@@ -229,6 +229,9 @@ function buildAPI(globalOptions, html, jar) {
 	];
 
 	const defaultFuncs = utils.makeDefaults(html, userID, ctx);
+	api.postFormData = function (url, body) {
+		return defaultFuncs.postFormData(url, ctx.jar, body);
+	};
 
 	// Load all api functions in a loop
 	apiFuncNames.map(v => api[v] = require('./src/' + v)(defaultFuncs, api, ctx));
